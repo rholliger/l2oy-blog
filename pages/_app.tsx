@@ -1,13 +1,29 @@
+import { FC, useEffect, useState } from 'react'
 import type { AppProps } from 'next/app'
 
-import GlobalStyle from '../styles/globalStyles'
+import { ThemeProvider } from 'styled-components'
 
-function MyApp({ Component, pageProps }: AppProps) {
+import GlobalStyle from '../styles/globalStyles'
+import { darkTheme, lightTheme } from '../styles/themes'
+import LayoutContainer from '../components/LayoutContainer'
+import useDarkMode from 'use-dark-mode'
+
+const MyApp: FC<AppProps> = ({ Component, pageProps }) => {
+  const [isMounted, setIsMounted] = useState(false)
+  const darkMode = useDarkMode(true)
+  const theme = darkMode.value ? darkTheme : lightTheme
+
+  useEffect(() => {
+    setIsMounted(true)
+  }, [])
+
   return (
-    <>
+    <ThemeProvider theme={theme}>
       <GlobalStyle />
-      <Component {...pageProps} />
-    </>
+      <LayoutContainer>
+        {isMounted && <Component {...pageProps} />}
+      </LayoutContainer>
+    </ThemeProvider>
   )
 }
 
