@@ -10,7 +10,8 @@ import useDarkMode from 'use-dark-mode'
 
 const MyApp: FC<AppProps> = ({ Component, pageProps }) => {
   const [isMounted, setIsMounted] = useState(false)
-  const darkMode = useDarkMode(true)
+  const darkMode = useDarkMode(false)
+
   const theme = darkMode.value ? darkTheme : lightTheme
 
   useEffect(() => {
@@ -20,9 +21,11 @@ const MyApp: FC<AppProps> = ({ Component, pageProps }) => {
   return (
     <ThemeProvider theme={theme}>
       <GlobalStyle />
-      <LayoutContainer>
-        {isMounted && <Component {...pageProps} />}
-      </LayoutContainer>
+      {isMounted && (
+        <LayoutContainer>
+          <Component {...pageProps} />
+        </LayoutContainer>
+      )}
     </ThemeProvider>
   )
 }
