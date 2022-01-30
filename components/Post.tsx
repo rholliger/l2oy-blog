@@ -9,12 +9,13 @@ import { SanityImageSource } from '@sanity/image-url/lib/types/types'
 import { isMobile } from '../utils/device'
 import useBreakpoints, { Breakpoint } from '../hooks/useBreakpoints'
 import { formattedDate } from '../utils/dates'
+import CategoryTags from './CategoryTags'
 
 type PostType = 'full' | 'half'
 
 interface PostMetadata {
   date?: string
-  categories?: string[]
+  categories?: Category[]
   author?: string
 }
 
@@ -73,14 +74,15 @@ const PostImage = styled.img<StyledPostProps>`
 const PostTextContainer = styled.div`
   width: 100%;
   max-height: 400px;
-  padding: 12px 20px;
+  padding: 16px;
 `
 
 const PostTitle = styled.h2`
   font-family: 'Oxygen', sans-serif;
   font-size: 34px;
   font-weight: 700;
-  margin: 20px 0;
+  margin: 12px 0;
+  color: ${({ theme }) => theme.foreground};
 `
 
 const PostLead = styled.p`
@@ -93,35 +95,17 @@ const PostLead = styled.p`
 `
 
 const PostMetadata = styled.div`
-  font-family: 'Lato', sans-serif;
-  display: flex;
-  justify-content: space-between;
-  font-size: 14px;
-  font-weight: 300;
-  color: ${({ theme }) => theme.text};
-  margin-top: 6px;
-`
-
-const PostCategoryContainer = styled.span``
-
-const PostCategory = styled.span`
-  ${({ theme, color }) => {
+  ${({ theme }) => {
     return css`
-      /* font-family: 'Lato', sans-serif; */
-      font-weight: 500;
-      padding: 3px 10px;
-      border-radius: 4px;
-      margin-left: 10px;
-
+      font-family: 'Lato', sans-serif;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 14px;
+      font-weight: 300;
       color: ${theme.text};
-      /* background-color: ${theme.text}; */
-      border: 1px solid ${theme.text};
-
-      &:hover {
-        background-color: ${theme.text};
-        color: ${theme.background};
-        transition: 0.2s ease-out;
-      }
+      gap: 10px;
     `
   }}
 `
@@ -158,13 +142,7 @@ const Post: FC<PostProps> = ({ type, title, lead, slug, metadata, image }) => {
         <PostTextContainer>
           <PostMetadata>
             <span>{formattedDate(metadata.date)}</span>
-            <PostCategoryContainer>
-              {metadata.categories?.map((category) => (
-                <PostCategory key={category}>
-                  <Link href="/posts/my-third-blog">{category}</Link>
-                </PostCategory>
-              ))}
-            </PostCategoryContainer>
+            <CategoryTags categories={metadata.categories} />
           </PostMetadata>
           <PostTitle>{title}</PostTitle>
           <PostAuthor>by Roy Holliger</PostAuthor>

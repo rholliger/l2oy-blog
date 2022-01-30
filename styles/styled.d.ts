@@ -9,6 +9,7 @@ declare module 'styled-components' {
     text: string
     toggleBorder: string
     background: string
+    foreground: string
     mainShadow: string
     postItemShadow: string
     devices: Responsive

@@ -2,35 +2,36 @@ import { SanityImageSource } from '@sanity/image-url/lib/types/types'
 
 import client from '.'
 
+// TODO: is this needed?
 const escapeHTML = (htmlString: string) =>
   htmlString.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;')
 
-export const getAllPosts = async () => {
-  const blogFields = `
-    _id,
-    title,
-    lead,
-    'slug': slug.current,
-    author->{name},
-    mainImage,
-    publishedAt,
-    'categories': categories[]->title
-  `
+const BLOG_FIELDS_ALL_POSTS = `
+  _id,
+  title,
+  lead,
+  'slug': slug.current,
+  author->{name},
+  mainImage,
+  publishedAt,
+  'categories': categories[]->{ title, 'slug': slug.current }
+`
 
+const getAllPosts = async () => {
   const results = await client.fetch(
-    `*[_type == "post"] | order(publishedAt desc) { ${blogFields} }`
+    `*[_type == "post"] | order(publishedAt desc) { ${BLOG_FIELDS_ALL_POSTS} }`
   )
   return results
 }
 
-export const getPost = async (slug: string) => {
+const getPost = async (slug: string) => {
   const blogFields = `
     title,
     lead,
     author->{name},
     mainImage,
     publishedAt,
-    'categories': categories[]->title,
+    'categories': categories[]->{ title, 'slug': slug.current },
     body[]{..., "asset": asset->}
   `
 
@@ -43,14 +44,48 @@ export const getPost = async (slug: string) => {
     )
     .then((res) => res?.[0])
 
-  console.log('result', result)
+  // console.log('result', result)
 
   return result
 }
 
-export const getAllSlugs = async () => {
+const getAllPostSlugs = async () => {
   const results = await client.fetch(
     `*[_type == "post"] { 'slug': slug.current }`
   )
   return results
+}
+
+const getAllCategorySlugs = async () => {
+  const results = await client.fetch(
+    `*[_type == "category"] { 'slug': slug.current }`
+  )
+  return results
+}
+
+const getPostsInCategory = async (categorySlug: string) => {
+  const result = await client
+    .fetch(
+      `*[_type == "category" && slug.current == $slug]{ 
+        _id,
+        title,
+        'relatedPosts': *[_type == 'post' && references(^._id)] | order(publishedAt desc) { ${BLOG_FIELDS_ALL_POSTS} }
+    }`,
+      {
+        slug: categorySlug,
+      }
+    )
+    .then((res) => res?.[0])
+
+  console.log('category result', result)
+
+  return result
+}
+
+export {
+  getAllCategorySlugs,
+  getAllPostSlugs,
+  getAllPosts,
+  getPost,
+  getPostsInCategory,
 }

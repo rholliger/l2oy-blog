@@ -4,6 +4,7 @@ import Image from 'next/image'
 import styled, { css } from 'styled-components'
 import LayoutContainer from '../components/LayoutContainer'
 import Post from '../components/Post'
+import PostsList from '../components/PostsList'
 import { getAllPosts } from '../sanity/api'
 import { urlFor } from '../sanity/utils'
 import { IPost } from '../types/Posts'
@@ -27,30 +28,7 @@ const StyledContainer = styled.div`
 const Home: NextPage<PostsProps> = ({ posts }) => {
   console.log('posts', posts)
 
-  return (
-    <StyledContainer>
-      {posts.map(
-        (
-          { slug, title, author, lead, publishedAt, categories, mainImage },
-          index
-        ) => (
-          <Post
-            key={slug}
-            slug={slug}
-            type={index % 4 === 0 ? 'full' : 'half'}
-            title={title}
-            lead={lead}
-            image={mainImage}
-            metadata={{
-              date: publishedAt,
-              categories,
-              author: author.name,
-            }}
-          />
-        )
-      )}
-    </StyledContainer>
-  )
+  return <PostsList posts={posts} />
 }
 
 export const getStaticProps: GetStaticProps<PostsProps> = async () => {

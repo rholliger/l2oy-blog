@@ -2,26 +2,26 @@ import Link from 'next/link'
 import { FC } from 'react'
 import styled, { css } from 'styled-components'
 
-interface CategoriesProps {
-  categories: string[]
+interface CategoryTagsProps {
+  categories?: Category[]
 }
 
 const CategoriesLink = styled.a`
-  ${({ theme, color }) => {
+  ${({ theme }) => {
     return css`
       /* font-family: 'Lato', sans-serif; */
       font-size: 14px;
       font-weight: 400;
       padding: 3px 10px;
-      border-radius: 4px;
+      border-radius: 0px;
       display: inline-block;
 
-      color: ${theme.text};
+      color: ${theme.foreground};
       /* background-color: ${theme.text}; */
-      border: 1px solid ${theme.text};
+      border: 1px solid ${theme.foreground};
 
       &:hover {
-        background-color: ${theme.text};
+        background-color: ${theme.foreground};
         color: ${theme.background};
         transition: 0.2s ease-out;
       }
@@ -33,16 +33,19 @@ const CategoriesLink = styled.a`
   }}
 `
 
-const Categories: FC<CategoriesProps> = ({ categories }) => (
+const CategoryTags: FC<CategoryTagsProps> = ({ categories }) => (
   <div>
     <span>
       {categories?.map((category) => (
-        <Link key={category} href="/posts/my-third-blog" passHref>
-          <CategoriesLink>{category}</CategoriesLink>
+        <Link
+          key={category.slug}
+          href={`/categories/${category.slug}`}
+          passHref>
+          <CategoriesLink>{category.title}</CategoriesLink>
         </Link>
       ))}
     </span>
   </div>
 )
 
-export default Categories
+export default CategoryTags

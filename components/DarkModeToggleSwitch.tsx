@@ -12,7 +12,7 @@ const Slider = styled.span`
       left: 0;
       right: 0;
       bottom: 0;
-      background-color: ${theme.text};
+      background-color: ${theme.foreground};
       -webkit-transition: 0.4s;
       transition: 0.4s;
       border-radius: 22px;
@@ -57,6 +57,7 @@ const Switch = styled.label`
 const IconContainer = styled.span`
   cursor: pointer;
   margin: 12px;
+  color: ${({ theme }) => theme.foreground};
 `
 
 const StyledIcon = styled(FontAwesomeIcon)`

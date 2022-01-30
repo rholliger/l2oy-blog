@@ -1,9 +1,9 @@
 import { GetStaticPaths, GetStaticProps, NextPage } from 'next/types'
 import { ParsedUrlQuery } from 'querystring'
 import styled, { css } from 'styled-components'
-import Categories from '../../components/Categories'
+import CategoryTags from '../../components/CategoryTags'
 import PostContent from '../../components/PostContent'
-import { getAllPosts, getAllSlugs, getPost } from '../../sanity/api'
+import { getAllPostSlugs, getPost } from '../../sanity/api'
 import { IPost } from '../../types/Posts'
 import { formattedDate } from '../../utils/dates'
 
@@ -22,12 +22,15 @@ interface PostParams extends ParsedUrlQuery {
 const StyledDiv = styled.div`
   ${({ theme }) => {
     return css`
-      padding: ${theme.measures.gap.horizontal}px
-        ${theme.measures.gap.horizontal}px;
-      margin: ${theme.measures.gap.vertical}px 20px;
+      padding: ${theme.measures.gap.horizontal}px;
+      margin: 40px 0;
       background-color: ${theme.background};
       color: ${theme.text};
       box-shadow: ${theme.mainShadow};
+
+      @media ${theme.devices.tablet} {
+        padding: 20px;
+      }
     `
   }}
 `
@@ -44,9 +47,10 @@ const StyledMetadata = styled.div`
   font-weight: 300;
   color: ${({ theme }) => theme.text};
   display: flex;
+  flex-wrap: wrap;
   align-items: center;
   justify-content: space-between;
-  gap: 20px;
+  gap: 10px;
   margin-bottom: 20px;
 `
 
@@ -79,7 +83,7 @@ const Posts: NextPage<IPost> = ({
     <StyledDiv>
       <StyledMetadata>
         {publishedAt && <div>{formattedDate(publishedAt)}</div>}
-        {categories && <Categories categories={categories} />}
+        {categories && <CategoryTags categories={categories} />}
       </StyledMetadata>
       <StyledTitle>{title}</StyledTitle>
       <StyledAuthor>by {author.name} Holliger</StyledAuthor>
@@ -101,7 +105,7 @@ export const getStaticProps: GetStaticProps<PostProps> = async ({ params }) => {
 }
 
 export const getStaticPaths: GetStaticPaths<PostParams> = async () => {
-  const slugs: Slugs[] = await getAllSlugs()
+  const slugs: Slugs[] = await getAllPostSlugs()
 
   const paths = slugs?.map((s) => ({ params: { slug: s.slug } }))
 
