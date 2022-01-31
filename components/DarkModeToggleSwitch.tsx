@@ -1,6 +1,6 @@
 import styled, { css } from 'styled-components'
 import useDarkMode from 'use-dark-mode'
-import { faMoon, fas, faSun } from '@fortawesome/free-solid-svg-icons'
+import { faMoon, faSun } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
 const Slider = styled.span`

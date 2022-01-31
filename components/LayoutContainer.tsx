@@ -2,6 +2,7 @@ import Link from 'next/link'
 import { FC } from 'react'
 import styled, { css } from 'styled-components'
 import DarkModeToggleSwitch from './DarkModeToggleSwitch'
+import SocialButtons from './SocialButtons'
 
 interface LayoutContainerProps {
   children: React.ReactNode
@@ -34,20 +35,14 @@ const Header = styled.header`
 const Logo = styled.div`
   ${({ theme }) => {
     return css`
-      /* font-family: 'Plom-Praeng';
-      font-size: 120px; */
-
-      /* font-family: 'AginoeSans';
-      font-size: 80px; */
-
-      /* font-family: 'Hughs';
-      font-size: 100px; */
+      font-family: 'Hughs';
+      font-size: 100px;
 
       /* font-family: 'SimvoniItalic';
       font-size: 100px; */
 
-      font-family: 'Conthrax', sans-serif;
-      font-size: 74px;
+      /* font-family: 'Conthrax', sans-serif;
+      font-size: 74px; */
 
       color: ${theme.foreground};
 
@@ -59,9 +54,21 @@ const Logo = styled.div`
 `
 
 const Navigation = styled.nav`
-  > span {
-    &::before {
-      content: ' // ';
+  font-family: 'Oxygen';
+  font-size: 24px;
+  font-weight: 200;
+
+  > a {
+    color: ${({ theme }) => theme.foreground};
+
+    &:hover {
+      &::after {
+        content: ' < ';
+      }
+
+      &::before {
+        content: ' > ';
+      }
     }
   }
 `
@@ -81,15 +88,13 @@ const LayoutContainer: FC<LayoutContainerProps> = ({ children }) => {
           <Link href="/">l2oy.dev</Link>
         </Logo>
         <Navigation>
-          <span>About me</span>
-          <span>Contact</span>
+          <Link href="/about">About Me</Link>
         </Navigation>
         <DarkModeToggleSwitch />
       </Header>
       <div>{children}</div>
       <Footer>
-        <span>Twitter</span>
-        <span>Github</span>
+        <SocialButtons isHorizontal />
       </Footer>
     </Wrapper>
   )

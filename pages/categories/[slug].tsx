@@ -26,9 +26,9 @@ const StyledCategoriesTitleContainer = styled.div`
 const StyledCategoryTitle = styled.div`
   ${({ theme }) => {
     return css`
-      /* font-family: 'Lato', sans-serif; */
+      font-family: 'Oxygen', sans-serif;
       width: 100%;
-      font-size: 36px;
+      font-size: 40px;
       font-weight: 200;
       padding: 12px 24px;
       border-radius: 0px;
@@ -37,8 +37,6 @@ const StyledCategoryTitle = styled.div`
       text-align: center;
 
       color: ${theme.foreground};
-      /* background-color: ${theme.text}; */
-      /* border: 2px solid ${theme.text}; */
 
       &:before,
       &:after {

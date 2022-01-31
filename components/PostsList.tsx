@@ -7,8 +7,7 @@ const StyledContainer = styled.div`
   ${({ theme }) => {
     return css`
       display: flex;
-      /* padding: 60px 20px; */
-      margin-top: 40px;
+      margin: 40px 0;
       flex-wrap: wrap;
       justify-content: flex-start;
       gap: ${theme.measures.gap.vertical}px ${theme.measures.gap.horizontal}px;

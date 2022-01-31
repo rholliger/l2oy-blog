@@ -11,22 +11,6 @@ const GlobalStyle = createGlobalStyle`
   }
 
   @font-face {
-    font-family: 'Plom-Praeng';
-    src: url('/fonts/PlomPraeng.woff2') format('woff2');
-    font-style: normal;
-    font-weight: 400;
-    font-display: swap;
-  }
-
-  @font-face {
-    font-family: 'AginoeSans';
-    src: url('/fonts/AginoeSans-Regular.woff2') format('woff2');
-    font-style: normal;
-    font-weight: 400;
-    font-display: swap;
-  }
-
-  @font-face {
     font-family: 'SimvoniItalic';
     src: url('/fonts/SimvoniItalic-mLVOx.woff2') format('woff2');
     font-style: normal;

@@ -82,10 +82,27 @@ const getPostsInCategory = async (categorySlug: string) => {
   return result
 }
 
+const getBio = async () => {
+  console.log('bio')
+  const result = await client
+    .fetch(
+      `*[_type == "author" && slug.current == "roy"] {
+      bio,
+      image
+    }`
+    )
+    .then((res) => res?.[0])
+
+  console.log('result', result)
+
+  return result
+}
+
 export {
   getAllCategorySlugs,
   getAllPostSlugs,
   getAllPosts,
   getPost,
   getPostsInCategory,
+  getBio,
 }
