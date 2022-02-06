@@ -25,7 +25,7 @@ const StyledSocialButtons = styled.ul<SocialButtonProps>`
         list-style-type: none;
         padding: 0;
         margin: 0;
-        color: ${({ theme }) => theme.foreground};
+        color: ${theme.foreground};
 
         > a {
           align-items: center;
@@ -45,25 +45,31 @@ const SocialButtons: FC<SocialButtonProps> = ({ isHorizontal }) => {
   return (
     <StyledSocialButtons isHorizontal={isHorizontal}>
       <li>
-        <a href="#">
+        <a href="mailto:roy@roy.dev">
           <FontAwesomeIcon icon={faEnvelopeSquare} size="2x" />
           {!isHorizontal && 'roy@roy.dev'}
         </a>
       </li>
       <li>
-        <a href="#">
+        <a
+          href="https://www.linkedin.com/in/roy-holliger/"
+          target="_blank"
+          rel="noreferrer">
           <FontAwesomeIcon icon={faLinkedin} size="2x" />
           {!isHorizontal && 'royholliger'}
         </a>
       </li>
       <li>
-        <a href="#">
+        <a
+          href="https://twitter.com/royholliger"
+          target="_blank"
+          rel="noreferrer">
           <FontAwesomeIcon icon={faTwitterSquare} size="2x" />
           {!isHorizontal && '@royholliger'}
         </a>
       </li>
       <li>
-        <a href="#">
+        <a href="https://github.com/rholliger" target="_blank" rel="noreferrer">
           <FontAwesomeIcon icon={faGithubSquare} size="2x" />
           {!isHorizontal && 'rholliger'}
         </a>

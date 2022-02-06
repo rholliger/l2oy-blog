@@ -1,5 +1,5 @@
 import highlight from 'highlight.js'
-import { createRef, FC, ReactChildren, ReactNode, useEffect } from 'react'
+import { createRef, FC, ReactNode, useEffect } from 'react'
 
 import 'highlight.js/styles/a11y-dark.css'
 import styled from 'styled-components'

@@ -1,12 +1,10 @@
 import { FC } from 'react'
 import styled, { css } from 'styled-components'
 import { ellipsis } from 'polished'
-import dayjs from 'dayjs'
 import Link from 'next/link'
 
 import { urlFor } from '../sanity/utils'
 import { SanityImageSource } from '@sanity/image-url/lib/types/types'
-import { isMobile } from '../utils/device'
 import useBreakpoints, { Breakpoint } from '../hooks/useBreakpoints'
 import { formattedDate } from '../utils/dates'
 import CategoryTags from './CategoryTags'
@@ -145,7 +143,7 @@ const Post: FC<PostProps> = ({ type, title, lead, slug, metadata, image }) => {
             <CategoryTags categories={metadata.categories} />
           </PostMetadata>
           <PostTitle>{title}</PostTitle>
-          <PostAuthor>by Roy Holliger</PostAuthor>
+          <PostAuthor>by {metadata.author}</PostAuthor>
           <PostLead>{lead}</PostLead>
         </PostTextContainer>
       </PostContainer>

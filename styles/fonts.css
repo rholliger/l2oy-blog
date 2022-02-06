@@ -1,0 +1,13 @@
+/* Fonts need to be in their own css files, because the font will flash, and reload if we put it in createGlobalStyles
+  from styled-components 
+  https://github.com/styled-components/styled-components/issues/2227
+*/
+
+@font-face {
+  font-family: 'Hughs';
+  src: url('/fonts/Hughs.woff2') format('woff2'),
+    url('/fonts/Hughs.woff') format('woff');
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+}

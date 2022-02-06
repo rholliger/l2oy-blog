@@ -2,6 +2,7 @@ import { GetStaticPaths, GetStaticProps, NextPage } from 'next/types'
 import { ParsedUrlQuery } from 'querystring'
 import styled, { css } from 'styled-components'
 import CategoryTags from '../../components/CategoryTags'
+import MetaTags from '../../components/MetaTags'
 import PostContent from '../../components/PostContent'
 import { getAllPostSlugs, getPost } from '../../sanity/api'
 import { IPost } from '../../types/Posts'
@@ -37,7 +38,7 @@ const StyledDiv = styled.div`
 
 const StyledTitle = styled.h2`
   font-family: 'Oxygen', sans-serif;
-  font-size: 60px;
+  font-size: clamp(38px, 8vw, 60px);
   font-weight: 700;
   margin: 0 0 40px 0;
 `
@@ -78,15 +79,17 @@ const Posts: NextPage<IPost> = ({
   publishedAt,
   body,
   categories,
+  lead,
 }) => {
   return (
     <StyledDiv>
+      <MetaTags title={title} description={lead} />
       <StyledMetadata>
         {publishedAt && <div>{formattedDate(publishedAt)}</div>}
         {categories && <CategoryTags categories={categories} />}
       </StyledMetadata>
       <StyledTitle>{title}</StyledTitle>
-      <StyledAuthor>by {author.name} Holliger</StyledAuthor>
+      <StyledAuthor>by {author.name}</StyledAuthor>
       <StyledText>
         <PostContent content={body} />
       </StyledText>
@@ -101,6 +104,7 @@ export const getStaticProps: GetStaticProps<PostProps> = async ({ params }) => {
     props: {
       ...post,
     },
+    revalidate: 60,
   }
 }
 

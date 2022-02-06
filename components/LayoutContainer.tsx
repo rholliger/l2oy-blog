@@ -9,10 +9,18 @@ interface LayoutContainerProps {
 }
 
 const Wrapper = styled.div`
-  margin-right: auto;
-  margin-left: auto;
-  max-width: 1024px;
-  padding: 0 20px;
+  ${({ theme }) => {
+    return css`
+      margin-right: auto;
+      margin-left: auto;
+      max-width: 1024px;
+      padding: 0 20px;
+
+      @media ${theme.devices.mobileM} {
+        padding: 0 12px;
+      }
+    `
+  }}
 `
 
 const Header = styled.header`
@@ -38,23 +46,17 @@ const Logo = styled.div`
       font-family: 'Hughs';
       font-size: 100px;
 
-      /* font-family: 'SimvoniItalic';
-      font-size: 100px; */
-
-      /* font-family: 'Conthrax', sans-serif;
-      font-size: 74px; */
-
       color: ${theme.foreground};
 
       @media ${theme.devices.mobileL} {
-        font-size: 50px;
+        font-size: 80px;
       }
     `
   }}
 `
 
 const Navigation = styled.nav`
-  font-family: 'Oxygen';
+  font-family: 'Oxygen', sans-serif;
   font-size: 24px;
   font-weight: 200;
 

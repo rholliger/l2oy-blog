@@ -67,8 +67,6 @@ const StyledIcon = styled(FontAwesomeIcon)`
 const ModeToggle = () => {
   const darkMode = useDarkMode()
 
-  console.log('mode toggle')
-
   return (
     <span>
       <IconContainer onClick={darkMode.toggle}>

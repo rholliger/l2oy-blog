@@ -11,7 +11,7 @@ export interface Author {
 export interface IPost {
   title: string
   slug: string
-  lead?: string
+  lead: string
   categories?: Category[]
   mainImage?: SanityImageSource
   publishedAt?: string

@@ -1,10 +1,4 @@
-import { SanityImageSource } from '@sanity/image-url/lib/types/types'
-
 import client from '.'
-
-// TODO: is this needed?
-const escapeHTML = (htmlString: string) =>
-  htmlString.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;')
 
 const BLOG_FIELDS_ALL_POSTS = `
   _id,
@@ -44,8 +38,6 @@ const getPost = async (slug: string) => {
     )
     .then((res) => res?.[0])
 
-  // console.log('result', result)
-
   return result
 }
 
@@ -69,6 +61,7 @@ const getPostsInCategory = async (categorySlug: string) => {
       `*[_type == "category" && slug.current == $slug]{ 
         _id,
         title,
+        description,
         'relatedPosts': *[_type == 'post' && references(^._id)] | order(publishedAt desc) { ${BLOG_FIELDS_ALL_POSTS} }
     }`,
       {
@@ -77,13 +70,10 @@ const getPostsInCategory = async (categorySlug: string) => {
     )
     .then((res) => res?.[0])
 
-  console.log('category result', result)
-
   return result
 }
 
 const getBio = async () => {
-  console.log('bio')
   const result = await client
     .fetch(
       `*[_type == "author" && slug.current == "roy"] {
@@ -92,8 +82,6 @@ const getBio = async () => {
     }`
     )
     .then((res) => res?.[0])
-
-  console.log('result', result)
 
   return result
 }

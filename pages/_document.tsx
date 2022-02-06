@@ -48,15 +48,8 @@ export default class MyDocument extends Document {
             crossOrigin="true"
           />
           <link
-            href="https://fonts.googleapis.com/css2?family=Barlow:wght@300;400;500;600&family=Carter+One&family=Do+Hyeon&family=Lato:wght@300;400;700&family=Manrope:wght@300;400;500;600&family=Montserrat:wght@300;400;500;600&family=Nunito:wght@300;400;600&family=Oxygen:wght@300;400;700&family=Quicksand:wght@300;400;500;600&family=Sen:wght@400;700&family=Urbanist:wght@300;400;500;600&family=Viga&display=swap"
+            href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&family=Oxygen:wght@300;400;700&display=swap"
             rel="stylesheet"
-          />
-
-          <link
-            rel="preload"
-            href="/fonts/conthrax.sb.woff2"
-            as="font"
-            crossOrigin=""
           />
         </Head>
         <body>

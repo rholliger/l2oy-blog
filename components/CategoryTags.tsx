@@ -9,7 +9,7 @@ interface CategoryTagsProps {
 const CategoriesLink = styled.a`
   ${({ theme }) => {
     return css`
-      /* font-family: 'Lato', sans-serif; */
+      font-family: 'Lato', sans-serif;
       font-size: 14px;
       font-weight: 400;
       padding: 3px 10px;
@@ -17,7 +17,6 @@ const CategoriesLink = styled.a`
       display: inline-block;
 
       color: ${theme.foreground};
-      /* background-color: ${theme.text}; */
       border: 1px solid ${theme.foreground};
 
       &:hover {

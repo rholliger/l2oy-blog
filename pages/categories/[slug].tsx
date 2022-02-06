@@ -1,12 +1,14 @@
 import { GetStaticPaths, GetStaticProps, NextPage } from 'next/types'
 import { ParsedUrlQuery } from 'querystring'
 import styled, { css } from 'styled-components'
+import MetaTags from '../../components/MetaTags'
 import PostsList from '../../components/PostsList'
 import { getAllCategorySlugs, getPostsInCategory } from '../../sanity/api'
 import { IPost } from '../../types/Posts'
 
 interface CategoryProps {
   title: string
+  description: string
   relatedPosts: IPost[]
 }
 
@@ -28,9 +30,9 @@ const StyledCategoryTitle = styled.div`
     return css`
       font-family: 'Oxygen', sans-serif;
       width: 100%;
-      font-size: 40px;
+      font-size: clamp(28px, 6vw, 40px);
       font-weight: 200;
-      padding: 12px 24px;
+      padding: 16px 0px;
       border-radius: 0px;
       display: flex;
       align-items: center;
@@ -57,9 +59,14 @@ const StyledCategoryTitle = styled.div`
   }}
 `
 
-const Categories: NextPage<CategoryProps> = ({ title, relatedPosts }) => {
+const Categories: NextPage<CategoryProps> = ({
+  title,
+  description,
+  relatedPosts,
+}) => {
   return (
     <div>
+      <MetaTags title={title} description={description} />
       <StyledCategoriesTitleContainer>
         <StyledCategoryTitle>{title}</StyledCategoryTitle>
       </StyledCategoriesTitleContainer>
@@ -77,6 +84,7 @@ export const getStaticProps: GetStaticProps<CategoryProps> = async ({
     props: {
       ...category,
     },
+    revalidate: 60,
   }
 }
 

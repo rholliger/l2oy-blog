@@ -1,20 +1,12 @@
-import { GetStaticPaths, GetStaticProps, NextPage } from 'next/types'
-import { ParsedUrlQuery } from 'querystring'
+import { GetStaticProps, NextPage } from 'next/types'
 import styled, { css } from 'styled-components'
 
-import { faEnvelopeSquare } from '@fortawesome/free-solid-svg-icons'
-import {
-  faLinkedin,
-  faTwitterSquare,
-  faGithubSquare,
-} from '@fortawesome/free-brands-svg-icons'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-
 import PostContent from '../components/PostContent'
-import { getAllPostSlugs, getBio, getPost } from '../sanity/api'
+import { getBio } from '../sanity/api'
 import { urlFor } from '../sanity/utils'
 import SocialButtons from '../components/SocialButtons'
 import { SanityImageSource } from '@sanity/image-url/lib/types/types'
+import MetaTags from '../components/MetaTags'
 
 interface AuthorProps {
   image: SanityImageSource
@@ -76,14 +68,6 @@ const StyledContactInfos = styled.div`
   }
 `
 
-const StyledContactList = styled.div`
-  font-size: 10px;
-`
-
-const StyledContactIcon = styled(FontAwesomeIcon)`
-  /* color: ${({ theme }) => theme.foreground}; */
-`
-
 const StyledAuthorImage = styled.img`
   ${({ theme }) => {
     return css`
@@ -123,6 +107,10 @@ const StyledText = styled.div`
 const Posts: NextPage<AuthorProps> = ({ bio, image }) => {
   return (
     <StyledDiv>
+      <MetaTags
+        title="About me | Roy.dev"
+        description="My name is Roy Holliger and I'm from Zurich, Switzerland. I'm what people would call a geek. In the world of Information Technology I feel at home. Welcome to my Blog about Tech."
+      />
       <StyledLeftContainer>
         <StyledAuthorImage
           src={
