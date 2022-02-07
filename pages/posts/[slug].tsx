@@ -1,12 +1,15 @@
+import { useRouter } from 'next/router'
 import { GetStaticPaths, GetStaticProps, NextPage } from 'next/types'
 import { ParsedUrlQuery } from 'querystring'
 import styled, { css } from 'styled-components'
 import CategoryTags from '../../components/CategoryTags'
+import Loader, { StyledLoaderContainer } from '../../components/Loader'
 import MetaTags from '../../components/MetaTags'
 import PostContent from '../../components/PostContent'
 import { getAllPostSlugs, getPost } from '../../sanity/api'
 import { IPost } from '../../types/Posts'
 import { formattedDate } from '../../utils/dates'
+import ErrorPage from '../404'
 
 interface PostProps {
   post: IPost
@@ -81,6 +84,20 @@ const Posts: NextPage<IPost> = ({
   categories,
   lead,
 }) => {
+  const router = useRouter()
+
+  if (!router.isFallback && !title) {
+    return <ErrorPage />
+  }
+
+  if (router.isFallback) {
+    return (
+      <StyledLoaderContainer>
+        <Loader />
+      </StyledLoaderContainer>
+    )
+  }
+
   return (
     <StyledDiv>
       <MetaTags title={title} description={lead} />
@@ -115,7 +132,7 @@ export const getStaticPaths: GetStaticPaths<PostParams> = async () => {
 
   return {
     paths,
-    fallback: false,
+    fallback: true,
   }
 }
 

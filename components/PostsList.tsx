@@ -26,7 +26,7 @@ const PostsList: FunctionComponent<Posts> = ({ posts }) => {
           <Post
             key={slug}
             slug={slug}
-            type={index % 4 === 0 ? 'full' : 'half'}
+            type={index % 5 === 0 ? 'full' : 'half'}
             title={title}
             lead={lead}
             image={mainImage}
