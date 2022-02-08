@@ -20,6 +20,11 @@ const GlobalStyle = createGlobalStyle`
   * {
     box-sizing: border-box;
   }
+
+  blockquote {
+    margin: 0;
+    padding: 0;
+  }
 `
 
 export default GlobalStyle

@@ -39,10 +39,18 @@ const StyledDiv = styled.div`
   }}
 `
 
-const StyledTitle = styled.h2`
+const StyledTitle = styled.h1`
   font-family: 'Oxygen', sans-serif;
   font-size: clamp(38px, 8vw, 60px);
   font-weight: 700;
+  margin: 0 0 40px 0;
+`
+
+const StyledLead = styled.h2`
+  font-family: 'Lato', sans-serif;
+  font-size: clamp(18px, 5vw, 22px);
+  font-weight: 400;
+  line-height: 30px;
   margin: 0 0 40px 0;
 `
 
@@ -106,6 +114,7 @@ const Posts: NextPage<IPost> = ({
         {categories && <CategoryTags categories={categories} />}
       </StyledMetadata>
       <StyledTitle>{title}</StyledTitle>
+      <StyledLead>{lead}</StyledLead>
       <StyledAuthor>by {author.name}</StyledAuthor>
       <StyledText>
         <PostContent content={body} />

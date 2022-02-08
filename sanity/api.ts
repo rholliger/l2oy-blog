@@ -26,7 +26,11 @@ const getPost = async (slug: string) => {
     mainImage,
     publishedAt,
     'categories': categories[]->{ title, 'slug': slug.current },
-    body[]{..., "asset": asset->}
+    body[]{..., "asset": asset->, markDefs[]{..., 
+      _type == "internalLink" => {
+        "slug": @.reference->slug
+      }
+    }}
   `
 
   const result = await client

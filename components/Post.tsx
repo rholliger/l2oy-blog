@@ -43,8 +43,16 @@ const PostContainer = styled.div<StyledPostProps>`
       box-shadow: ${theme.postItemShadow};
       transition: box-shadow 0.15s ease-out;
 
+      ${type === 'full' &&
+      css`
+        display: flex;
+        width: 100%;
+        max-height: 400px;
+      `}
+
       ${type === 'half' &&
       css`
+        width: ${halfHorizontal};
         @media ${theme.devices.tablet} {
           width: 100%;
         }
@@ -58,8 +66,10 @@ const PostImage = styled.img<StyledPostProps>`
     return css`
       ${type === 'full'
         ? css`
-            width: calc(50% - ${theme.measures.gap.horizontal / 2}px);
-            height: 100%;
+            max-width: 50%;
+            /* max-height: 400px; */
+            /* width: calc(50% - ${theme.measures.gap.horizontal / 2}px); */
+            /* height: 100%; */
             margin-right: ${theme.measures.gap.horizontal / 2}px;
           `
         : css`
@@ -99,7 +109,7 @@ const PostMetadata = styled.div`
       display: flex;
       flex-wrap: wrap;
       justify-content: space-between;
-      align-items: center;
+      align-items: flex-start;
       font-size: 14px;
       font-weight: 300;
       color: ${theme.text};
@@ -130,10 +140,9 @@ const Post: FC<PostProps> = ({ type, title, lead, slug, metadata, image }) => {
           src={
             image &&
             urlFor(image)
-              .crop('entropy')
-              .fit('min')
-              .width(1000)
-              .height(500)
+              .fit('crop')
+              .width(postType === 'full' ? 600 : 600)
+              .height(postType === 'full' ? 400 : 300)
               .url()
           }
         />
