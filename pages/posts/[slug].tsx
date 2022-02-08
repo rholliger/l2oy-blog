@@ -48,8 +48,8 @@ const StyledTitle = styled.h1`
 
 const StyledLead = styled.h2`
   font-family: 'Lato', sans-serif;
-  font-size: clamp(18px, 5vw, 22px);
-  font-weight: 400;
+  font-size: clamp(18px, 5vw, 20px);
+  font-weight: 300;
   line-height: 30px;
   margin: 0 0 40px 0;
 `
