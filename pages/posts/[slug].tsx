@@ -51,7 +51,7 @@ const StyledTitle = styled.h1`
   font-family: 'Oxygen', sans-serif;
   font-size: clamp(38px, 8vw, 52px);
   font-weight: 700;
-  margin: 0 0 40px 0;
+  margin: 0 0 20px 0;
 `
 
 const StyledLead = styled.h2`
