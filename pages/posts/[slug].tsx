@@ -7,6 +7,7 @@ import Loader, { StyledLoaderContainer } from '../../components/Loader'
 import MetaTags from '../../components/MetaTags'
 import PostContent from '../../components/PostContent'
 import { getAllPostSlugs, getPost } from '../../sanity/api'
+import { urlFor } from '../../sanity/utils'
 import { IPost } from '../../types/Posts'
 import { formattedDate } from '../../utils/dates'
 import ErrorPage from '../404'
@@ -26,11 +27,18 @@ interface PostParams extends ParsedUrlQuery {
 const StyledDiv = styled.div`
   ${({ theme }) => {
     return css`
-      padding: ${theme.measures.gap.horizontal}px;
       margin: 40px 0;
       background-color: ${theme.background};
       color: ${theme.text};
       box-shadow: ${theme.mainShadow};
+    `
+  }}
+`
+
+const StyledTextContainer = styled.div`
+  ${({ theme }) => {
+    return css`
+      padding: 40px;
 
       @media ${theme.devices.tablet} {
         padding: 20px;
@@ -41,14 +49,14 @@ const StyledDiv = styled.div`
 
 const StyledTitle = styled.h1`
   font-family: 'Oxygen', sans-serif;
-  font-size: clamp(38px, 8vw, 60px);
+  font-size: clamp(38px, 8vw, 52px);
   font-weight: 700;
   margin: 0 0 40px 0;
 `
 
 const StyledLead = styled.h2`
   font-family: 'Lato', sans-serif;
-  font-size: clamp(18px, 5vw, 20px);
+  font-size: clamp(18px, 5vw, 19px);
   font-weight: 300;
   line-height: 30px;
   margin: 0 0 40px 0;
@@ -84,6 +92,16 @@ const StyledAuthor = styled.div`
   font-weight: 300;
 `
 
+const StyledPostImageContainer = styled.div`
+  width: 100%;
+`
+
+const StyledPostImage = styled.img`
+  width: 100%;
+  max-height: 260px;
+  object-fit: cover;
+`
+
 const Posts: NextPage<IPost> = ({
   title,
   author,
@@ -91,6 +109,7 @@ const Posts: NextPage<IPost> = ({
   body,
   categories,
   lead,
+  mainImage,
 }) => {
   const router = useRouter()
 
@@ -107,19 +126,31 @@ const Posts: NextPage<IPost> = ({
   }
 
   return (
-    <StyledDiv>
-      <MetaTags title={title} description={lead} />
-      <StyledMetadata>
-        {publishedAt && <div>{formattedDate(publishedAt)}</div>}
-        {categories && <CategoryTags categories={categories} />}
-      </StyledMetadata>
-      <StyledTitle>{title}</StyledTitle>
-      <StyledLead>{lead}</StyledLead>
-      <StyledAuthor>by {author.name}</StyledAuthor>
-      <StyledText>
-        <PostContent content={body} />
-      </StyledText>
-    </StyledDiv>
+    <>
+      <StyledDiv>
+        <MetaTags title={title} description={lead} />
+        <StyledPostImageContainer>
+          <StyledPostImage
+            src={
+              mainImage &&
+              urlFor(mainImage).fit('crop').width(1200).height(1000).url()
+            }
+          />
+        </StyledPostImageContainer>
+        <StyledTextContainer>
+          <StyledMetadata>
+            {publishedAt && <div>{formattedDate(publishedAt)}</div>}
+            {categories && <CategoryTags categories={categories} />}
+          </StyledMetadata>
+          <StyledTitle>{title}</StyledTitle>
+          <StyledLead>{lead}</StyledLead>
+          <StyledAuthor>by {author.name}</StyledAuthor>
+          <StyledText>
+            <PostContent content={body} />
+          </StyledText>
+        </StyledTextContainer>
+      </StyledDiv>
+    </>
   )
 }
 

@@ -79,7 +79,7 @@ const Footer = styled.footer`
   display: flex;
   justify-content: center;
   gap: 10px;
-  padding-top: 40px;
+  padding: 40px;
 `
 
 const LayoutContainer: FC<LayoutContainerProps> = ({ children }) => {
