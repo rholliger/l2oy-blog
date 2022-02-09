@@ -67,7 +67,6 @@ const PostImage = styled.img<StyledPostProps>`
       ${type === 'full'
         ? css`
             max-width: 50%;
-            /* margin-right: ${theme.measures.gap.horizontal / 3}px; */
             object-fit: cover;
           `
         : css`

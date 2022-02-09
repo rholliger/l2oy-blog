@@ -45,9 +45,9 @@ const SocialButtons: FC<SocialButtonProps> = ({ isHorizontal }) => {
   return (
     <StyledSocialButtons isHorizontal={isHorizontal}>
       <li>
-        <a href="mailto:roy@roy.dev">
+        <a href="mailto:roy@l2oy.dev">
           <FontAwesomeIcon icon={faEnvelopeSquare} size="2x" />
-          {!isHorizontal && 'roy@roy.dev'}
+          {!isHorizontal && 'roy@l2oy.dev'}
         </a>
       </li>
       <li>
