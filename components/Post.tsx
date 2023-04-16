@@ -84,7 +84,7 @@ const PostTitle = styled.h2`
   font-family: 'Oxygen', sans-serif;
   font-size: 32px;
   font-weight: 700;
-  margin: 0 0 22px 0;
+  margin: 12px 0 22px 0;
   color: ${({ theme }) => theme.foreground};
 `
 
@@ -122,6 +122,12 @@ const PostAuthor = styled.div`
   color: ${({ theme }) => theme.text};
 `
 
+const PostDate = styled.span`
+font-family: 'Lato', sans-serif;
+font-size: 13px;
+  font-weight: 300;
+`
+
 const Post: FC<PostProps> = ({ type, title, lead, slug, metadata, image }) => {
   const breakpoints = useBreakpoints()
 
@@ -142,12 +148,13 @@ const Post: FC<PostProps> = ({ type, title, lead, slug, metadata, image }) => {
           }
         />
         <PostTextContainer>
+          <PostDate>8. Februar 2022{formattedDate(metadata.date)}</PostDate>
           <PostTitle>{title}</PostTitle>
           <PostMetadata>
             <PostAuthor>
               by {metadata.author}
             </PostAuthor>
-            <span>{formattedDate(metadata.date)}</span>
+
             <CategoryTags categories={metadata.categories} />
           </PostMetadata>
           <PostLead>{lead}</PostLead>
