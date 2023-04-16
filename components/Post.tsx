@@ -148,7 +148,7 @@ const Post: FC<PostProps> = ({ type, title, lead, slug, metadata, image }) => {
           }
         />
         <PostTextContainer>
-          <PostDate>8. Februar 2022{formattedDate(metadata.date)}</PostDate>
+          <PostDate>{formattedDate(metadata.date)}</PostDate>
           <PostTitle>{title}</PostTitle>
           <PostMetadata>
             <PostAuthor>
