@@ -47,7 +47,6 @@ const PostContainer = styled.div<StyledPostProps>`
       css`
         display: flex;
         width: 100%;
-        max-height: 320px;
       `}
 
       ${type === 'half' &&
@@ -78,15 +77,14 @@ const PostImage = styled.img<StyledPostProps>`
 
 const PostTextContainer = styled.div`
   width: 100%;
-  max-height: 400px;
   padding: 20px;
 `
 
 const PostTitle = styled.h2`
   font-family: 'Oxygen', sans-serif;
-  font-size: 34px;
+  font-size: 32px;
   font-weight: 700;
-  margin: 12px 0;
+  margin: 0 0 22px 0;
   color: ${({ theme }) => theme.foreground};
 `
 
@@ -106,7 +104,7 @@ const PostMetadata = styled.div`
       display: flex;
       flex-wrap: wrap;
       justify-content: space-between;
-      align-items: flex-start;
+      align-items: center;
       font-size: 14px;
       font-weight: 300;
       color: ${theme.text};
@@ -144,12 +142,14 @@ const Post: FC<PostProps> = ({ type, title, lead, slug, metadata, image }) => {
           }
         />
         <PostTextContainer>
+          <PostTitle>{title}</PostTitle>
           <PostMetadata>
+            <PostAuthor>
+              by {metadata.author}
+            </PostAuthor>
             <span>{formattedDate(metadata.date)}</span>
             <CategoryTags categories={metadata.categories} />
           </PostMetadata>
-          <PostTitle>{title}</PostTitle>
-          <PostAuthor>by {metadata.author}</PostAuthor>
           <PostLead>{lead}</PostLead>
         </PostTextContainer>
       </PostContainer>
