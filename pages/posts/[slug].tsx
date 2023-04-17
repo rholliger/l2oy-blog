@@ -80,7 +80,7 @@ const StyledText = styled.div`
   font-size: 17px;
   line-height: 30px;
   text-align: left;
-  margin: 40px 0;
+  margin: 24px 0;
 
   > div > div {
     margin: 30px 0;
@@ -100,6 +100,14 @@ const StyledPostImage = styled.img`
   width: 100%;
   max-height: 260px;
   object-fit: cover;
+`
+
+const HorizontalDivider = styled.hr`
+  height: 1px;
+  color: #eee;
+  background-color: #eee;
+  border: none;
+  margin-top: 24px
 `
 
 const Posts: NextPage<IPost> = ({
@@ -145,6 +153,7 @@ const Posts: NextPage<IPost> = ({
           <StyledTitle>{title}</StyledTitle>
           <StyledLead>{lead}</StyledLead>
           <StyledAuthor>by {author.name}</StyledAuthor>
+          <HorizontalDivider />
           <StyledText>
             <PostContent content={body} />
           </StyledText>
