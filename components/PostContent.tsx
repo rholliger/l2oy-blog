@@ -60,7 +60,7 @@ const StyledBlockImageWrapper = styled.div<StyledBlockImageWrapperProps>`
   text-align: ${({ position }) => position};
 `
 
-const StyledBlockImageContainer = styled.div`
+const StyledBlockImageContainer = styled.a`
   display: inline-block;
 `
 
@@ -79,6 +79,10 @@ const StyledLink = styled.a`
   text-decoration: underline;
 `
 
+const StyledImage = styled.img`
+  max-width: 100%;
+`
+
 const serializers = {
   types: {
     code: ({ node: { language, code } }: BlockCodeProps) => (
@@ -88,10 +92,10 @@ const serializers = {
       node: { asset, alt, caption, position = 'center' },
     }: BlockImageProps) => (
       <StyledBlockImageWrapper position={position}>
-        <StyledBlockImageContainer>
+        <StyledBlockImageContainer href={urlFor(asset).url()}>
           {asset && (
             // TODO: Use next-sanity-image package in the future
-            <img src={urlFor(asset).height(300).fit('max').url()} alt={alt} />
+            <StyledImage src={urlFor(asset).height(400).fit('max').url()} alt={alt} />
           )}
           <StyledBlockImageDescription>{caption}</StyledBlockImageDescription>
         </StyledBlockImageContainer>

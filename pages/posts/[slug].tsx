@@ -49,7 +49,7 @@ const StyledTextContainer = styled.div`
 
 const StyledTitle = styled.h1`
   font-family: 'Oxygen', sans-serif;
-  font-size: clamp(38px, 8vw, 52px);
+  font-size: clamp(34px, 8vw, 52px);
   font-weight: 700;
   margin: 0 0 20px 0;
 `
