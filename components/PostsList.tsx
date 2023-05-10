@@ -20,23 +20,33 @@ const PostsList: FunctionComponent<Posts> = ({ posts }) => {
     <StyledContainer>
       {posts.map(
         (
-          { slug, title, author, lead, publishedAt, categories, mainImage },
+          {
+            slug,
+            title,
+            author,
+            lead,
+            publishedAt,
+            categories,
+            mainImage,
+            onlyAccessibleThroughLink,
+          },
           index
-        ) => (
-          <Post
-            key={slug}
-            slug={slug}
-            type={index % 5 === 0 ? 'full' : 'half'}
-            title={title}
-            lead={lead}
-            image={mainImage}
-            metadata={{
-              date: publishedAt,
-              categories,
-              author: author.name,
-            }}
-          />
-        )
+        ) =>
+          !onlyAccessibleThroughLink ? (
+            <Post
+              key={slug}
+              slug={slug}
+              type={index % 5 === 0 ? 'full' : 'half'}
+              title={title}
+              lead={lead}
+              image={mainImage}
+              metadata={{
+                date: publishedAt,
+                categories,
+                author: author.name,
+              }}
+            />
+          ) : null
       )}
     </StyledContainer>
   )

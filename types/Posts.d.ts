@@ -17,4 +17,5 @@ export interface IPost {
   publishedAt?: string
   author: Author
   body: Array
+  onlyAccessibleThroughLink: boolean
 }

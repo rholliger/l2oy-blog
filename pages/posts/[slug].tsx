@@ -107,7 +107,7 @@ const HorizontalDivider = styled.hr`
   color: #eee;
   background-color: #eee;
   border: none;
-  margin-top: 24px
+  margin-top: 24px;
 `
 
 const Posts: NextPage<IPost> = ({

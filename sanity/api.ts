@@ -8,13 +8,15 @@ const BLOG_FIELDS_ALL_POSTS = `
   author->{name},
   mainImage,
   publishedAt,
-  'categories': categories[]->{ title, 'slug': slug.current }
+  'categories': categories[]->{ title, 'slug': slug.current },
+  onlyAccessibleThroughLink
 `
 
 const getAllPosts = async () => {
   const results = await client.fetch(
     `*[_type == "post"] | order(publishedAt desc) { ${BLOG_FIELDS_ALL_POSTS} }`
   )
+
   return results
 }
 
