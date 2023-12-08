@@ -8,7 +8,7 @@ interface CategoryTagsProps {
   categories?: Category[]
 }
 
-const CategoriesLink = styled.a`
+const CategoriesLink = styled(Link)`
   ${({ theme }) => {
     return css`
       font-family: 'Lato', sans-serif;
@@ -125,12 +125,12 @@ const CategoryTags: FC<CategoryTagsProps> = ({ categories }) => {
     <StyledCategoriesContainer>
       <span>
         {shownCategories?.map((category) => (
-          <Link
+          <CategoriesLink
             key={category.slug}
             href={`/categories/${category.slug}`}
             passHref>
-            <CategoriesLink>{category.title}</CategoriesLink>
-          </Link>
+            {category.title}
+          </CategoriesLink>
         ))}
         {remainingCategories.length !== 0 && (
           <>
@@ -147,14 +147,12 @@ const CategoryTags: FC<CategoryTagsProps> = ({ categories }) => {
                   <ul>
                     {remainingCategories.map((remainingCategories) => (
                       <li key={remainingCategories.slug}>
-                        <Link
+                        <CategoriesLink
                           key={remainingCategories.slug}
                           href={`/categories/${remainingCategories.slug}`}
                           passHref>
-                          <CategoriesLink>
-                            {remainingCategories.title}
-                          </CategoriesLink>
-                        </Link>
+                          {remainingCategories.title}
+                        </CategoriesLink>
                       </li>
                     ))}
                   </ul>

@@ -1,4 +1,4 @@
-import client from '.'
+import { client } from '.'
 
 const BLOG_FIELDS_ALL_POSTS = `
   _id,
