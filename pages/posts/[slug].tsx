@@ -2,6 +2,8 @@ import { useRouter } from 'next/router'
 import { GetStaticPaths, GetStaticProps, NextPage } from 'next/types'
 import { ParsedUrlQuery } from 'querystring'
 import styled, { css } from 'styled-components'
+import Image from 'next/image'
+
 import CategoryTags from '../../components/CategoryTags'
 import Loader, { StyledLoaderContainer } from '../../components/Loader'
 import MetaTags from '../../components/MetaTags'
@@ -94,6 +96,8 @@ const StyledAuthor = styled.div`
 
 const StyledPostImageContainer = styled.div`
   width: 100%;
+  height: 300px;
+  position: relative;
 `
 
 const StyledPostImage = styled.img`
@@ -138,12 +142,14 @@ const Posts: NextPage<IPost> = ({
       <StyledDiv>
         <MetaTags title={title} description={lead} />
         <StyledPostImageContainer>
-          <StyledPostImage
-            src={
-              mainImage &&
-              urlFor(mainImage).fit('crop').width(1200).height(1000).url()
-            }
-          />
+          {mainImage && (
+            <Image
+              src={urlFor(mainImage).fit('crop').width(1200).height(1000).url()}
+              fill={true}
+              style={{ objectFit: 'cover' }}
+              alt={mainImage.alt}
+            />
+          )}
         </StyledPostImageContainer>
         <StyledTextContainer>
           <StyledMetadata>
@@ -165,6 +171,8 @@ const Posts: NextPage<IPost> = ({
 
 export const getStaticProps: GetStaticProps<PostProps> = async ({ params }) => {
   const post = await getPost((params as PostParams).slug)
+
+  console.log('POST', post)
 
   return {
     props: {

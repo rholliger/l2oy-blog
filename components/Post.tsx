@@ -8,6 +8,7 @@ import { SanityImageSource } from '@sanity/image-url/lib/types/types'
 import useBreakpoints, { Breakpoint } from '../hooks/useBreakpoints'
 import { formattedDate } from '../utils/dates'
 import CategoryTags from './CategoryTags'
+import Image from 'next/image'
 
 type PostType = 'full' | 'half'
 
@@ -20,7 +21,7 @@ interface PostMetadata {
 interface PostProps {
   type: PostType
   slug: string
-  image?: SanityImageSource
+  image?: SanityImageSource & { alt: string }
   metadata: PostMetadata
   title: string
   lead?: string
@@ -47,9 +48,11 @@ const PostContainer = styled.div<StyledPostProps>`
       css`
         display: flex;
         width: 100%;
+        max-height: 300px;
 
         > a {
           display: flex;
+          position: relative;
         }
       `}
 
@@ -79,9 +82,20 @@ const PostImage = styled.img<StyledPostProps>`
   }}
 `
 
-const PostTextContainer = styled.div`
-  width: 100%;
-  padding: 20px;
+const PostTextContainer = styled.div<StyledPostProps>`
+  ${({ theme, type }) => {
+    return css`
+      ${type === 'full'
+        ? css`
+            width: 50%;
+            padding: 20px;
+          `
+        : css`
+            width: 100%;
+            padding: 20px;
+          `}
+    `
+  }}
 `
 
 const PostTitle = styled.h2`
@@ -132,6 +146,24 @@ const PostDate = styled.span`
   font-weight: 300;
 `
 
+const PostImageContainer = styled.div<StyledPostProps>`
+  ${({ theme, type }) => {
+    return css`
+      position: relative;
+      height: 300px;
+      object-fit: cover;
+
+      ${type === 'full'
+        ? css`
+            width: 50%;
+          `
+        : css`
+            width: 100%;
+          `}
+    `
+  }}
+`
+
 const Post: FC<PostProps> = ({ type, title, lead, slug, metadata, image }) => {
   const breakpoints = useBreakpoints()
 
@@ -140,23 +172,25 @@ const Post: FC<PostProps> = ({ type, title, lead, slug, metadata, image }) => {
   return (
     <PostContainer type={postType}>
       <Link href={`/posts/${slug}`}>
-        <PostImage
-          type={postType}
-          src={
-            image &&
-            urlFor(image)
-              .fit('crop')
-              .width(postType === 'full' ? 500 : 600)
-              .height(postType === 'full' ? 300 : 300)
-              .url()
-          }
-        />
-        <PostTextContainer>
+        <PostImageContainer type={postType}>
+          {image && (
+            <Image
+              src={urlFor(image)
+                .fit('crop')
+                .width(postType === 'full' ? 500 : 600)
+                .height(postType === 'full' ? 300 : 300)
+                .url()}
+              fill={true}
+              style={{ objectFit: 'cover' }}
+              alt={image.alt}
+            />
+          )}
+        </PostImageContainer>
+        <PostTextContainer type={postType}>
           <PostDate>{formattedDate(metadata.date)}</PostDate>
           <PostTitle>{title}</PostTitle>
           <PostMetadata>
             <PostAuthor>by {metadata.author}</PostAuthor>
-
             <CategoryTags categories={metadata.categories} />
           </PostMetadata>
           <PostLead>{lead}</PostLead>

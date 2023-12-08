@@ -62,6 +62,8 @@ const StyledBlockImageWrapper = styled.div<StyledBlockImageWrapperProps>`
 
 const StyledBlockImageContainer = styled.a`
   display: inline-block;
+  position: relative;
+  width: 50vw;
 `
 
 const StyledBlockImageDescription = styled.div`
@@ -94,8 +96,14 @@ const serializers = {
       <StyledBlockImageWrapper position={position}>
         <StyledBlockImageContainer href={urlFor(asset).url()}>
           {asset && (
-            // TODO: Use next-sanity-image package in the future
-            <StyledImage src={urlFor(asset).height(400).fit('max').url()} alt={alt} />
+            <Image
+              src={urlFor(asset).fit('max').url()}
+              width={0}
+              height={0}
+              sizes="100vw"
+              style={{ width: '100%', height: 'auto' }}
+              alt={alt ?? ''}
+            />
           )}
           <StyledBlockImageDescription>{caption}</StyledBlockImageDescription>
         </StyledBlockImageContainer>

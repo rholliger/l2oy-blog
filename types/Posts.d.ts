@@ -13,7 +13,7 @@ export interface IPost {
   slug: string
   lead: string
   categories?: Category[]
-  mainImage?: SanityImageSource
+  mainImage?: SanityImageSource & { alt: string }
   publishedAt?: string
   author: Author
   body: Array

@@ -1,4 +1,5 @@
 import { GetStaticProps, NextPage } from 'next/types'
+import Image from 'next/image'
 import styled, { css } from 'styled-components'
 
 import PostContent from '../components/PostContent'
@@ -104,6 +105,12 @@ const StyledText = styled.div`
   }
 `
 
+const StyledImageContainer = styled.div`
+  width: 220px;
+  height: 220px;
+  position: relative;
+`
+
 const Posts: NextPage<AuthorProps> = ({ bio, image }) => {
   return (
     <StyledDiv>
@@ -112,17 +119,15 @@ const Posts: NextPage<AuthorProps> = ({ bio, image }) => {
         description="My name is Roy Holliger and I'm from Zurich, Switzerland. I'm what people would call a geek. In the world of Information Technology I feel at home. Welcome to my Blog about Tech."
       />
       <StyledLeftContainer>
-        <StyledAuthorImage
-          src={
-            image &&
-            urlFor(image)
-              .crop('entropy')
-              .fit('crop')
-              .width(220)
-              .height(220)
-              .url()
-          }
-        />
+        <StyledImageContainer>
+          {image && (
+            <Image
+              src={urlFor(image).fit('crop').width(400).height(400).url()}
+              fill={true}
+              alt="Portrait of Roy Holliger"
+            />
+          )}
+        </StyledImageContainer>
         <StyledContactInfos>
           <SocialButtons />
         </StyledContactInfos>
