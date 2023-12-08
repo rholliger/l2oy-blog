@@ -47,6 +47,10 @@ const PostContainer = styled.div<StyledPostProps>`
       css`
         display: flex;
         width: 100%;
+
+        > a {
+          display: flex;
+        }
       `}
 
       ${type === 'half' &&
@@ -123,8 +127,8 @@ const PostAuthor = styled.div`
 `
 
 const PostDate = styled.span`
-font-family: 'Lato', sans-serif;
-font-size: 13px;
+  font-family: 'Lato', sans-serif;
+  font-size: 13px;
   font-weight: 300;
 `
 
@@ -134,8 +138,8 @@ const Post: FC<PostProps> = ({ type, title, lead, slug, metadata, image }) => {
   const postType = breakpoints === Breakpoint.MOBILE ? 'half' : type
 
   return (
-    <Link href={`/posts/${slug}`} passHref>
-      <PostContainer type={postType}>
+    <PostContainer type={postType}>
+      <Link href={`/posts/${slug}`}>
         <PostImage
           type={postType}
           src={
@@ -151,16 +155,14 @@ const Post: FC<PostProps> = ({ type, title, lead, slug, metadata, image }) => {
           <PostDate>{formattedDate(metadata.date)}</PostDate>
           <PostTitle>{title}</PostTitle>
           <PostMetadata>
-            <PostAuthor>
-              by {metadata.author}
-            </PostAuthor>
+            <PostAuthor>by {metadata.author}</PostAuthor>
 
             <CategoryTags categories={metadata.categories} />
           </PostMetadata>
           <PostLead>{lead}</PostLead>
         </PostTextContainer>
-      </PostContainer>
-    </Link>
+      </Link>
+    </PostContainer>
   )
 }
 
