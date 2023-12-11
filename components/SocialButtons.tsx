@@ -1,8 +1,8 @@
 import { faEnvelopeSquare } from '@fortawesome/free-solid-svg-icons'
 import {
   faLinkedin,
-  faTwitterSquare,
   faGithubSquare,
+  faSquareXTwitter,
 } from '@fortawesome/free-brands-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import styled, { css } from 'styled-components'
@@ -45,7 +45,7 @@ const SocialButtons: FC<SocialButtonProps> = ({ isHorizontal }) => {
   return (
     <StyledSocialButtons isHorizontal={isHorizontal}>
       <li>
-        <a href="mailto:roy@l2oy.dev">
+        <a href="mailto:roy@l2oy.dev" aria-label="Send an E-Mail to Roy">
           <FontAwesomeIcon icon={faEnvelopeSquare} size="2x" />
           {!isHorizontal && 'roy@l2oy.dev'}
         </a>
@@ -54,7 +54,8 @@ const SocialButtons: FC<SocialButtonProps> = ({ isHorizontal }) => {
         <a
           href="https://www.linkedin.com/in/roy-holliger/"
           target="_blank"
-          rel="noreferrer">
+          rel="noreferrer"
+          aria-label="Go to Roys LinkedIn Page">
           <FontAwesomeIcon icon={faLinkedin} size="2x" />
           {!isHorizontal && 'royholliger'}
         </a>
@@ -63,13 +64,18 @@ const SocialButtons: FC<SocialButtonProps> = ({ isHorizontal }) => {
         <a
           href="https://twitter.com/royholliger"
           target="_blank"
-          rel="noreferrer">
-          <FontAwesomeIcon icon={faTwitterSquare} size="2x" />
+          rel="noreferrer"
+          aria-label="Go to Roys X Page">
+          <FontAwesomeIcon icon={faSquareXTwitter} size="2x" />
           {!isHorizontal && '@royholliger'}
         </a>
       </li>
       <li>
-        <a href="https://github.com/rholliger" target="_blank" rel="noreferrer">
+        <a
+          href="https://github.com/rholliger"
+          target="_blank"
+          rel="noreferrer"
+          aria-label="Go to Roys Github Page">
           <FontAwesomeIcon icon={faGithubSquare} size="2x" />
           {!isHorizontal && 'rholliger'}
         </a>

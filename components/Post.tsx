@@ -36,7 +36,6 @@ const PostContainer = styled.div<StyledPostProps>`
     const halfHorizontal = `calc(50% - ${theme.measures.gap.horizontal / 2}px)`
 
     return css`
-      ${type === 'full' && 'display: flex'};
       background-color: ${theme.background};
       color: ${theme.text};
       width: ${type === 'full' ? '100%' : halfHorizontal};
@@ -46,7 +45,6 @@ const PostContainer = styled.div<StyledPostProps>`
 
       ${type === 'full' &&
       css`
-        display: flex;
         width: 100%;
         max-height: 300px;
 
@@ -63,21 +61,6 @@ const PostContainer = styled.div<StyledPostProps>`
           width: 100%;
         }
       `}
-    `
-  }}
-`
-
-const PostImage = styled.img<StyledPostProps>`
-  ${({ theme, type }) => {
-    return css`
-      ${type === 'full'
-        ? css`
-            max-width: 50%;
-            object-fit: cover;
-          `
-        : css`
-            width: 100%;
-          `}
     `
   }}
 `
@@ -183,6 +166,7 @@ const Post: FC<PostProps> = ({ type, title, lead, slug, metadata, image }) => {
               fill={true}
               style={{ objectFit: 'cover' }}
               alt={image.alt}
+              loading="eager"
             />
           )}
         </PostImageContainer>

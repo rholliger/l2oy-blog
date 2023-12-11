@@ -148,6 +148,7 @@ const Posts: NextPage<IPost> = ({
               fill={true}
               style={{ objectFit: 'cover' }}
               alt={mainImage.alt}
+              loading="eager"
             />
           )}
         </StyledPostImageContainer>
