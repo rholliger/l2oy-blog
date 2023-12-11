@@ -1,5 +1,5 @@
 import Link from 'next/link'
-import { FC, useEffect, useRef, useState } from 'react'
+import { FC, useEffect, useState } from 'react'
 import styled, { css } from 'styled-components'
 import { faChevronUp, faChevronDown } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
