@@ -66,7 +66,7 @@ const PostContainer = styled.div<StyledPostProps>`
 `
 
 const PostTextContainer = styled.div<StyledPostProps>`
-  ${({ theme, type }) => {
+  ${({ type }) => {
     return css`
       ${type === 'full'
         ? css`
@@ -130,7 +130,7 @@ const PostDate = styled.span`
 `
 
 const PostImageContainer = styled.div<StyledPostProps>`
-  ${({ theme, type }) => {
+  ${({ type }) => {
     return css`
       position: relative;
       height: 300px;
