@@ -1,23 +1,7 @@
-import styled, { css, ThemeConsumer } from 'styled-components'
+import styled, { css } from 'styled-components'
 import { faMeteor, faHome } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import Link from 'next/link'
-
-const StyledDiv = styled.div`
-  ${({ theme }) => {
-    return css`
-      padding: ${theme.measures.gap.horizontal}px;
-      margin: 40px 0;
-      background-color: ${theme.background};
-      color: ${theme.text};
-      box-shadow: ${theme.mainShadow};
-
-      @media ${theme.devices.tablet} {
-        padding: 20px;
-      }
-    `
-  }}
-`
 
 const StyledErrorPageContainer = styled.div`
   ${({ theme }) => {

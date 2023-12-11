@@ -100,12 +100,6 @@ const StyledPostImageContainer = styled.div`
   position: relative;
 `
 
-const StyledPostImage = styled.img`
-  width: 100%;
-  max-height: 260px;
-  object-fit: cover;
-`
-
 const HorizontalDivider = styled.hr`
   height: 1px;
   color: #eee;

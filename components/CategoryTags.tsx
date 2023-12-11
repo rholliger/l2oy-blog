@@ -88,7 +88,6 @@ const StyledDropdownButton = styled.button`
 `
 
 const CategoryTags: FC<CategoryTagsProps> = ({ categories }) => {
-  const divRef = useRef<HTMLDivElement>(null)
   const [shownCategories, setShownCategories] = useState<
     Category[] | undefined
   >(categories)

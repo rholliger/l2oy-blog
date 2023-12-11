@@ -69,23 +69,6 @@ const StyledContactInfos = styled.div`
   }
 `
 
-const StyledAuthorImage = styled.img`
-  ${({ theme }) => {
-    return css`
-      border-radius: 300px;
-      height: 220px;
-
-      @media ${theme.devices.tablet} {
-        height: 140px;
-      }
-
-      @media ${theme.devices.mobileXL} {
-        height: 200px;
-      }
-    `
-  }}
-`
-
 const StyledText = styled.div`
   font-family: 'Lato', sans-serif;
   font-weight: 300;

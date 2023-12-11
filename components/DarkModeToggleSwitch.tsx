@@ -72,16 +72,14 @@ const ModeToggle = () => {
       <IconContainer onClick={darkMode.toggle}>
         <StyledIcon icon={faSun} />
       </IconContainer>
-      <Switch>
-        <label htmlFor="darkmode-toggle">
-          <input
-            id="darkmode-toggle"
-            type="checkbox"
-            onChange={darkMode.toggle}
-            checked={darkMode.value}
-            aria-labelledby="darkmode-toggle"
-          />
-        </label>
+      <Switch htmlFor="darkmode-toggle">
+        <input
+          id="darkmode-toggle"
+          type="checkbox"
+          onChange={darkMode.toggle}
+          checked={darkMode.value}
+          aria-labelledby="darkmode-toggle"
+        />
         <Slider />
       </Switch>
       <IconContainer onClick={darkMode.toggle}>

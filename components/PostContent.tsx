@@ -81,10 +81,6 @@ const StyledLink = styled.a`
   text-decoration: underline;
 `
 
-const StyledImage = styled.img`
-  max-width: 100%;
-`
-
 const serializers = {
   types: {
     code: ({ node: { language, code } }: BlockCodeProps) => (
