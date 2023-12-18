@@ -46,7 +46,6 @@ const PostContainer = styled.div<StyledPostProps>`
       ${type === 'full' &&
       css`
         width: 100%;
-        max-height: 300px;
 
         > a {
           display: flex;
@@ -133,7 +132,7 @@ const PostImageContainer = styled.div<StyledPostProps>`
   ${({ type }) => {
     return css`
       position: relative;
-      height: 300px;
+      min-height: 300px;
       object-fit: cover;
 
       ${type === 'full'
