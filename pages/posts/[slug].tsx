@@ -138,7 +138,7 @@ const Posts: NextPage<IPost> = ({
         <StyledPostImageContainer>
           {mainImage && (
             <Image
-              src={urlFor(mainImage).fit('crop').width(1200).height(1000).url()}
+              src={urlFor(mainImage).fit('crop').url()}
               fill={true}
               style={{ objectFit: 'cover' }}
               alt={mainImage.alt}
@@ -166,8 +166,6 @@ const Posts: NextPage<IPost> = ({
 
 export const getStaticProps: GetStaticProps<PostProps> = async ({ params }) => {
   const post = await getPost((params as PostParams).slug)
-
-  console.log('POST', post)
 
   return {
     props: {

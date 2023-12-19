@@ -27,7 +27,7 @@ const PostsList: FunctionComponent<Posts> = ({ posts }) => {
             lead,
             publishedAt,
             categories,
-            mainImage,
+            teaserImage,
             onlyAccessibleThroughLink,
           },
           index
@@ -39,7 +39,7 @@ const PostsList: FunctionComponent<Posts> = ({ posts }) => {
               type={index % 5 === 0 ? 'full' : 'half'}
               title={title}
               lead={lead}
-              image={mainImage}
+              image={teaserImage}
               metadata={{
                 date: publishedAt,
                 categories,

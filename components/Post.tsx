@@ -157,11 +157,7 @@ const Post: FC<PostProps> = ({ type, title, lead, slug, metadata, image }) => {
         <PostImageContainer type={postType}>
           {image && (
             <Image
-              src={urlFor(image)
-                .fit('crop')
-                .width(postType === 'full' ? 500 : 600)
-                .height(postType === 'full' ? 300 : 300)
-                .url()}
+              src={urlFor(image).fit('crop').crop('entropy').url()}
               fill={true}
               style={{ objectFit: 'cover' }}
               alt={image.alt}

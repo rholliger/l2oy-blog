@@ -6,7 +6,7 @@ const BLOG_FIELDS_ALL_POSTS = `
   lead,
   'slug': slug.current,
   author->{name},
-  mainImage,
+  teaserImage,
   publishedAt,
   'categories': categories[]->{ title, 'slug': slug.current },
   onlyAccessibleThroughLink
